@@ -1,5 +1,9 @@
 export function randomName() {
+    return (`${randomItem(adjectiveOne)} ${randomItem(adjectiveTwo)} ${randomItem(noun)}`);
+}
 
+const randomItem = function(arr){
+    return arr[Math.floor(Math.random()*arr.length)];
 }
 
 const adjectiveOne = [
@@ -86,4 +90,53 @@ const adjectiveTwo = [
     "Helpful",
     "Proud",
     "Puzzled",
+]
+
+const noun = [
+    "Toys",
+    "Book",
+    "Crayon",
+    "Pencil",
+    "Dog",
+    "Cat",
+    "Cup",
+    "Music",
+    "Apple",
+    "Stroller",
+    "Bike",
+    "Markers",
+    "Bag",
+    "Floor",
+    "Car",
+    "Train",
+    "Truck",
+    "Machine",
+    "Coney",
+    "Cards",
+    "Kitten",
+    "Spider",
+    "Oranges",
+    "Pig",
+    "Horse",
+    "Mouse",
+    "Pizza",
+    "Eggs",
+    "Wheel",
+    "Door",
+    "Window",
+    "Table",
+    "Basketball Hoop",
+    "Dresser",
+    "Picture Frame",
+    "Socks",
+    "Television",
+    "Handle",
+    "Crib",
+    "Bed",
+    "Mattress",
+    "Pillow",
+    "Grass",
+    "Slide",
+    "Hula hoop",
+    "Basket",
 ]
