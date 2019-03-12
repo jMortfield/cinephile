@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from '../firebase';
+
+import Header from './Header';
 import Login from './Login';
+import Logout from './Logout';
 import { randomName } from '../helpers';
 
-console.log(randomName());
+// console.log(randomName());
 
 
 class App extends Component {
@@ -26,14 +29,23 @@ class App extends Component {
         name: user.displayName,
         loggedOut: false
       });
+      this.props.history.push(`/groups/${this.state.uid}`);
     });
   };
+
+  guestLogin = () => {
+    this.setState({
+      uid: 'guest'
+    });
+    this.props.history.push(`/groups/guest`)
+  }
 
   logout = () => {
     auth.signOut().then(() => {
       this.setState({
         user: null,
         uid: null,
+        name: null,
         loggedOut: true
       });
     });
@@ -42,21 +54,14 @@ class App extends Component {
   render() {
     return (
       <header className="home">
-        <h1 className="home__header">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-          Molestiae, corporis.
-        </h1>
+        <Header />
         <div className="home__logIn">
           <div className="home__logIn--border">
-            <Login login={this.login} />
-            {/* {this.state.user ? (
-              <button onClick={this.logout}>Log Out</button>
-            ) : (
-              <button onClick={this.login}>Log In</button>
-            )} */}
-            <button className="home__logInButton--guest">
-              Sign in as guest
-            </button>
+          {this.state.loggedOut ? (
+            <Login login={this.login} guestLogin={this.guestLogin}/>
+          ) : (
+            <Logout logout={this.logout}/>
+          )}
           </div>
         </div>
       </header>
