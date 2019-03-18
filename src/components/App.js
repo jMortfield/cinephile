@@ -1,10 +1,14 @@
 import React, { Component } from 'react';
 import firebase, { auth, provider } from '../firebase';
+import { BrowserRouter, Route } from "react-router-dom";
+
 
 import Header from './Header';
 import Login from './Login';
 import Logout from './Logout';
-import { randomName } from '../helpers';
+import Groups from './Groups';
+import Home from './Home';
+// import { randomName } from '../helpers';
 
 // console.log(randomName());
 
@@ -53,18 +57,29 @@ class App extends Component {
 
   render() {
     return (
-      <header className="home">
-        <Header />
-        <div className="home__logIn">
-          <div className="home__logIn--border">
-          {this.state.loggedOut ? (
-            <Login login={this.login} guestLogin={this.guestLogin}/>
-          ) : (
-            <Logout logout={this.logout}/>
-          )}
+        <BrowserRouter>
+          <div>
+            <Route exact path="/" component={Home} />
+              {/* <header className="home">
+                <Header />
+                <div className="home__logIn">
+                  <div className="home__logIn--border">
+                    {this.state.loggedOut ? (
+                      <Login
+                        login={this.login}
+                        guestLogin={this.guestLogin}
+                        uid={this.state.uid}
+                      />
+                    ) : (
+                      <Logout logout={this.logout} />
+                    )}
+                  </div>
+                </div>
+              </header>
+            </Route> */}
+            <Route exact path="/groups/:userid" component={Groups} />
           </div>
-        </div>
-      </header>
+        </BrowserRouter>
     );
   }
 }
